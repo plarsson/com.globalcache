@@ -1,0 +1,81 @@
+{
+  "id": "com.globalcache",
+  "version": "1.0.0",
+  "compatibility": ">=1.5.0",
+  "sdk": 2,
+  "name": {
+    "en": "globalcache"
+  },
+  "description": {
+    "en": "Adds support for globalcache"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "plarsson",
+    "email": ""
+  },
+  "drivers": [
+    {
+        "id": "ip2ir",
+        "name": {
+            "en": "Itach IP2IR"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [
+            {
+                "id": "list_devices",
+                "template": "list_devices",
+                "navigation": {
+                    "next": "add_devices"
+                }
+            },
+            {
+                "id": "add_devices",
+                "template": "add_devices"
+            }
+        ]
+    }
+  ],
+  "flow": {
+    "actions": [
+			{
+				"id": "send_command",
+				"title": {
+					"en": "Send Remote Command"
+				},
+				"args": [
+          { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir" },
+          {
+						"name": "connectoraddress",
+						"type": "autocomplete",
+						"placeholder": {
+							"en": "iTach connector"
+						}
+          },
+					{
+						"name": "irdevice",
+						"type": "autocomplete",
+						"placeholder": {
+							"en": "IR device name"
+						}
+          },
+          {
+						"name": "irfunction",
+						"type": "autocomplete",
+						"placeholder": {
+							"en": "IR function name"
+						}
+					}
+				]
+      }
+    ]
+  }
+}
