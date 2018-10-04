@@ -1,28 +1,11 @@
 const Homey = require('homey')
-var net = require('net')
+const ITachDevice = require('../itachdevice')
+const net = require('net')
 
-// https://www.globalcache.com/files/docs/API-iTach.pdf
-
-class ITachIP2IRDevice extends Homey.Device {
+class ITachIP2IRDevice extends ITachDevice {
   onInit () {
-    this.log('device init')
-    this.log('name:', this.getName())
-    this.log('class:', this.getClass())
-    this._deviceData = null
-    this._iRModuleAddresses = null
-  }
-
-  onAdded () {
-    this.log('device added')
-  }
-
-  onDeleted () {
-    this.log('device deleted')
-  }
-
-  async onAutoCompleteConnectorAddress (query, args) {
-    const res = this._iRModuleAddresses.map(v => { return { 'name': v } })
-    return res
+    super.onInit()
+    this._port = 4998
   }
 
   async onAutoCompleteIrDevice (query, args) {
@@ -66,23 +49,6 @@ class ITachIP2IRDevice extends Homey.Device {
     this._sendProntoCode(connectorAddress, irCode.value)
   }
 
-  refresh (deviceData) {
-    this._deviceData = deviceData
-    // console.log('deviceData refreshed', this._deviceData)
-    if (!this._irModuleAddresses) {
-      this._getIRModuleAddresses()
-    }
-  }
-
-  _getIP () {
-    const ip = this._deviceData.url.replace(/(^\w+:|^)\/\//, '')
-    return ip
-  }
-
-  _getPort () {
-    return 4998
-  }
-
   _sendProntoCode (connectorAddress, prontoString) {
     const regex = /^\s*[0-9A-F]{4}\s+([0-9A-F]{4})\s+[0-9A-F]{4}\s+[0-9A-F]{4}\s+(.+)/gm
     const [, rate, pronto] = regex.exec(prontoString) || []
@@ -108,44 +74,11 @@ class ITachIP2IRDevice extends Homey.Device {
     const dataStr = data.join()
 
     const client = new net.Socket()
-    client.connect(this._getPort(), this._getIP(), function () {
+    client.connect(this._port, this._deviceData.ip, function () {
       client.write(dataStr + '\r')
     })
 
     client.on('data', function (data) {
-      client.destroy()
-    })
-  }
-
-  _getIRModuleAddresses () {
-    const self = this
-    const client = new net.Socket()
-    client.connect(this._getPort(), this._getIP(), function () {
-      client.write('getdevices' + '\r')
-    })
-
-    client.on('data', function (data) {
-      const lines = data.toString().split('\r')
-      const modules = lines.reduce((acc, line) => {
-        const [spec, name] = line.split(' ')
-        if (name) {
-          const [, moduleNumber, count] = spec.split(',')
-          acc.push({ name, moduleNumber, count })
-        }
-        return acc
-      }, [])
-
-      const irModule = modules.find(module => module.name === 'IR')
-      if (!irModule) {
-        throw new Error('No ir module found on this device')
-      }
-      const res = []
-      const moduleNumber = parseInt(irModule.moduleNumber)
-      const count = parseInt(irModule.count)
-      for (let i = 1; i <= count; i++) {
-        res.push(moduleNumber + ':' + i)
-      }
-      self._iRModuleAddresses = res
       client.destroy()
     })
   }
