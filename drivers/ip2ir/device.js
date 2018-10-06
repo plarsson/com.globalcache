@@ -1,4 +1,3 @@
-const Homey = require('homey')
 const ITachDevice = require('../itachdevice')
 const net = require('net')
 

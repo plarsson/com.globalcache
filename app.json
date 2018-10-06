@@ -44,6 +44,27 @@
         ]
     },
     {
+        "id": "ip2cc",
+        "name": {
+            "en": "IP2CC / WF2CC"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [
+            {
+                "id": "list_devices",
+                "template": "list_devices",
+                "navigation": {
+                    "next": "add_devices"
+                }
+            },
+            {
+                "id": "add_devices",
+                "template": "add_devices"
+            }
+        ]
+    },
+    {
       "id": "ip2sl",
       "name": {
           "en": "IP2SL / WF2SL"
@@ -96,6 +117,29 @@
                         }
                     }
                 ]
+        },
+        {
+            "id": "send_relay_command",
+            "title": {
+                "en": "Send Remote Command"
+            },
+            "args": [
+                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc" },
+                {
+                    "name": "connectoraddress",
+                    "type": "autocomplete",
+                    "placeholder": {
+                        "en": "iTach connector"
+                    }
+                },
+                {
+                    "name": "outputstate",
+                    "type": "autocomplete",
+                    "placeholder": {
+                        "en": "state"
+                    }
+                }
+            ]
         },
         {
 			"id": "send_serial_command",
