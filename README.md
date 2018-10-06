@@ -1,3 +1,3 @@
-# Global cache
+# Global cache for Homey
 
-Adds support for globalcache iTachIP2IR
+Adds support for globalcache iTach devices
