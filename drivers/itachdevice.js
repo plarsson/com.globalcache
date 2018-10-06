@@ -10,7 +10,6 @@ class ITachDevice extends Homey.Device {
     this.log('class:', this.getClass())
     this._deviceData = null
     this._moduleAddresses = null
-
   }
 
   onAdded () {
@@ -32,6 +31,16 @@ class ITachDevice extends Homey.Device {
     if (!this._moduleAddresses) {
       this._getModuleAddresses(supportedModuleType)
     }
+  }
+
+  getJsonConfig (section) {
+    var json = Homey.ManagerSettings.get('mapping')
+    if (!json) {
+      return []
+    }
+    const mapping = JSON.parse(json)
+    console.log(mapping)
+    return mapping[section]
   }
 
   _getModuleAddresses (moduleName) {

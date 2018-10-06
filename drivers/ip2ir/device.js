@@ -9,42 +9,31 @@ class ITachIP2IRDevice extends ITachDevice {
   }
 
   async onAutoCompleteIrDevice (query, args) {
-    var json = Homey.ManagerSettings.get('mapping')
-    if (!json) {
-      return []
-    }
-    const mapping = JSON.parse(json)
-    const devices = mapping.map(device => device.device)
+    var mapping = super.getJsonConfig('ir')
+
+    const devices = mapping.devices.map(device => device.device)
     const res = devices.map(v => { return { 'name': v } })
     return res
   }
 
   async onAutoCompleteIrFunction (query, args) {
-    var json = Homey.ManagerSettings.get('mapping')
-    if (!json) {
-      return []
-    }
+    var mapping = super.getJsonConfig('ir')
 
     const selectedDevice = args.irdevice
-    const mapping = JSON.parse(json)
-    const irDevice = mapping.find(device => device.device === selectedDevice.name)
+    const irDevice = mapping.devices.find(device => device.device === selectedDevice.name)
     const irFunctions = irDevice.codes.map(code => code.name)
     const res = irFunctions.map(v => { return { 'name': v } })
     return res
   }
 
   async executeCommand (args) {
-    var json = Homey.ManagerSettings.get('mapping')
-    if (!json) {
-      throw new Error('no configuration')
-    }
-    const mapping = JSON.parse(json)
+    var mapping = super.getJsonConfig('ir')
 
     const irDeviceName = args.irdevice.name
     const irFunctionName = args.irfunction.name
     const connectorAddress = args.connectoraddress.name
 
-    const irDevice = mapping.find(device => device.device === irDeviceName)
+    const irDevice = mapping.devices.find(device => device.device === irDeviceName)
     const irCode = irDevice.codes.find(code => code.name === irFunctionName)
     this._sendProntoCode(connectorAddress, irCode.value)
   }

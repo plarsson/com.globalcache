@@ -1,20 +1,11 @@
 const Homey = require('homey')
-const Discover = require('../../lib/discover')
+const discover = require('../../lib/discover')
 
 class ITachDriver extends Homey.Driver {
   onInit () {
-    this._discover = new Discover()
+    this._discover = discover
       .on('device', this._onDiscoverDevice.bind(this))
       .on('rediscover', this._onDiscoverDevice.bind(this))
-
-    this._discover.start()
-
-    this.actionSendCmd = new Homey.FlowCardAction('send_command')
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('connectoraddress')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteConnectorAddress(query, args) })
   }
 
   // overide by subclass
@@ -29,14 +20,12 @@ class ITachDriver extends Homey.Driver {
 
   _onDiscoverDevice (deviceData) {
     this.log('Device found:', deviceData.name, '@', deviceData.url)
-    if (this.isSupported) {
+    if (this.isSupported(deviceData.name)) {
       let homeyDevice = this.getDevice({
         id: deviceData.uuid
       })
       if (homeyDevice instanceof Homey.Device) {
         homeyDevice.refresh(this.supportedModuleType(), deviceData)
-      } else {
-        this.log('Device found but not paired yet')
       }
     }
   }
@@ -58,12 +47,14 @@ class ITachDriver extends Homey.Driver {
       for (let id in devicesObj) {
         let device = devicesObj[id]
 
-        devicesArr.push({
-          data: {
-            id: device.uuid
-          },
-          name: device.name + ` (${device.ip})`
-        })
+        if (this.isSupported(device.name)) {
+          devicesArr.push({
+            data: {
+              id: device.uuid
+            },
+            name: device.name + ` (${device.ip})`
+          })
+        }
       }
 
       if (devicesArr.length === 0) {

@@ -25,7 +25,7 @@
     {
         "id": "ip2ir",
         "name": {
-            "en": "Itach IP2IR"
+            "en": "IP2IR / WF2IR"
         },
         "class": "other",
         "capabilities": [],
@@ -42,40 +42,84 @@
                 "template": "add_devices"
             }
         ]
-    }
+    },
+    {
+      "id": "ip2sl",
+      "name": {
+          "en": "IP2SL / WF2SL"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+          {
+              "id": "list_devices",
+              "template": "list_devices",
+              "navigation": {
+                  "next": "add_devices"
+              }
+          },
+          {
+              "id": "add_devices",
+              "template": "add_devices"
+          }
+      ]
+  }
   ],
   "flow": {
     "actions": [
 			{
-				"id": "send_command",
+				"id": "send_ir_command",
 				"title": {
 					"en": "Send Remote Command"
 				},
 				"args": [
-          { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir" },
-          {
-						"name": "connectoraddress",
-						"type": "autocomplete",
-						"placeholder": {
-							"en": "iTach connector"
-						}
-          },
-					{
-						"name": "irdevice",
-						"type": "autocomplete",
-						"placeholder": {
-							"en": "IR device name"
-						}
-          },
-          {
-						"name": "irfunction",
-						"type": "autocomplete",
-						"placeholder": {
-							"en": "IR function name"
-						}
-					}
-				]
-      }
+                    { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir" },
+                    {
+                        "name": "connectoraddress",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "iTach connector"
+                        }
+                    },
+                    {
+                        "name": "irdevice",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "IR device name"
+                        }
+                    },
+                    {
+                        "name": "irfunction",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "IR function name"
+                        }
+                    }
+                ]
+        },
+        {
+			"id": "send_serial_command",
+            "title": {
+                "en": "Send Serial Command"
+            },
+            "args": [
+                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl" },
+                {
+                    "name": "connectoraddress",
+                    "type": "autocomplete",
+                    "placeholder": {
+                        "en": "iTach connector"
+                    }
+                },
+                {
+                    "name": "serialcmd",
+                    "type": "autocomplete",
+                    "placeholder": {
+                        "en": "Serial cmd name"
+                    }
+                }
+            ]
+        }
     ]
   }
 }
