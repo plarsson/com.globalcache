@@ -22,6 +22,7 @@ class ITachIP2IRDevice extends ITachDevice {
 
     const header = []
     header.push('set_SERIAL')
+    header.push(connectorAddress)
     header.push(mapping.baudrate)
     header.push(mapping.flowcontrol)
     header.push(mapping.parity)
