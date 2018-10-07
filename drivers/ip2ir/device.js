@@ -89,7 +89,7 @@ class ITachIP2IRDevice extends ITachDevice {
       if (dataStr.startsWith('ERR')) {
         console.log('error', dataStr)
       }
-      if (dataStr.startsWith('busyIR')) {
+      if (dataStr.startsWith('busyIR') && retries > 0) {
         await sleep(100)
         self._sendProntoCode(connectorAddress, prontoString, retries - 1)
       }
