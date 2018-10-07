@@ -1,10 +1,12 @@
 const ITachDevice = require('../itachdevice')
 const net = require('net')
+const sem = require('semaphore')(1)
 
 class ITachIP2IRDevice extends ITachDevice {
   onInit () {
     super.onInit()
     this._port = 4998
+    this._jobid = 1
   }
 
   async onAutoCompleteIrDevice (query, args) {
@@ -34,11 +36,10 @@ class ITachIP2IRDevice extends ITachDevice {
 
     const irDevice = mapping.devices.find(device => device.device === irDeviceName)
     const irCode = irDevice.codes.find(code => code.name === irFunctionName)
-    await this._sendProntoCode(connectorAddress, irCode.value)
+    await this._sendProntoCode(connectorAddress, irCode.value, 20)
   }
 
-  async _sendProntoCode (connectorAddress, prontoString) {
-
+  async _sendProntoCode (connectorAddress, prontoString, retries = 0) {
     function sleep (ms = 0) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
@@ -56,10 +57,12 @@ class ITachIP2IRDevice extends ITachDevice {
     const header = []
     header.push('sendir')
     header.push(connectorAddress)
-    header.push('1') // id (job id)
+    header.push(this._jobid % 65535) // id (job id)
     header.push(iTachRate)
     header.push(1)
     header.push(1)
+
+    this._jobid = this._jobid + 1
 
     const prontoCodes = pronto.split(' ')
     const gc100Codes = prontoCodes.map(c => parseInt(c, 16))
@@ -69,19 +72,26 @@ class ITachIP2IRDevice extends ITachDevice {
     const self = this
 
     const client = new net.Socket()
-    client.connect(this._port, this._deviceData.ip, () => {
-      client.write(dataStr + '\r')
+
+    client.connect(this._port, this._deviceData.ip, async () => {
+      sem.take(() => {
+        client.write(dataStr + '\r')
+      })
     })
 
     client.on('close', () => {
+      sem.leave()
       client.destroy()
     })
 
     client.on('data', async (data) => {
       const dataStr = data.toString()
+      if (dataStr.startsWith('ERR')) {
+        console.log('error', dataStr)
+      }
       if (dataStr.startsWith('busyIR')) {
         await sleep(100)
-        self._sendProntoCode(connectorAddress, prontoString)
+        self._sendProntoCode(connectorAddress, prontoString, retries - 1)
       }
       client.destroy()
     })
