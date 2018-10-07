@@ -39,12 +39,13 @@ class ITachIP2SLDevice extends ITachDevice {
       configClient.write(serialConfig + '\r')
     })
 
+    const self = this
     configClient.on('data', function (data) {
       configClient.destroy()
 
       const payloadClient = new net.Socket()
       // TODO assign serial port according to module pos
-      payloadClient.connect(this._serialPort, this._deviceData.ip, function () {
+      payloadClient.connect(self._serialPort, self._deviceData.ip, function () {
         console.log('sending payload ' + payload)
         payloadClient.write(payload)
       })
