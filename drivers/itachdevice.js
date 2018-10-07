@@ -39,7 +39,6 @@ class ITachDevice extends Homey.Device {
       return []
     }
     const mapping = JSON.parse(json)
-    console.log(mapping)
     return mapping[section]
   }
 

@@ -34,10 +34,15 @@ class ITachIP2IRDevice extends ITachDevice {
 
     const irDevice = mapping.devices.find(device => device.device === irDeviceName)
     const irCode = irDevice.codes.find(code => code.name === irFunctionName)
-    this._sendProntoCode(connectorAddress, irCode.value)
+    await this._sendProntoCode(connectorAddress, irCode.value)
   }
 
-  _sendProntoCode (connectorAddress, prontoString) {
+  async _sendProntoCode (connectorAddress, prontoString) {
+
+    function sleep (ms = 0) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
     const regex = /^\s*[0-9A-F]{4}\s+([0-9A-F]{4})\s+[0-9A-F]{4}\s+[0-9A-F]{4}\s+(.+)/gm
     const [, rate, pronto] = regex.exec(prontoString) || []
 
@@ -61,12 +66,23 @@ class ITachIP2IRDevice extends ITachDevice {
     const data = header.concat(gc100Codes)
     const dataStr = data.join()
 
+    const self = this
+
     const client = new net.Socket()
-    client.connect(this._port, this._deviceData.ip, function () {
+    client.connect(this._port, this._deviceData.ip, () => {
       client.write(dataStr + '\r')
     })
 
-    client.on('data', function (data) {
+    client.on('close', () => {
+      client.destroy()
+    })
+
+    client.on('data', async (data) => {
+      const dataStr = data.toString()
+      if (dataStr.startsWith('busyIR')) {
+        await sleep(100)
+        self._sendProntoCode(connectorAddress, prontoString)
+      }
       client.destroy()
     })
   }

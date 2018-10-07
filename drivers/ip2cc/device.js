@@ -28,11 +28,15 @@ class ITachIP2CCDevice extends ITachDevice {
     const dataStr = cmd.join(',')
 
     const client = new net.Socket()
-    client.connect(this._port, this._deviceData.ip, function () {
+    client.connect(this._port, this._deviceData.ip, () => {
       client.write(dataStr + '\r')
     })
 
-    client.on('data', function (data) {
+    client.on('close', () => {
+      client.destroy()
+    })
+
+    client.on('data', (data) => {
       client.destroy()
     })
   }

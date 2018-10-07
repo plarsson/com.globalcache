@@ -5,7 +5,7 @@ class ITachIP2SLDevice extends ITachDevice {
   onInit () {
     super.onInit()
     this._port = 4998
-    this._serialPort = 4999
+    this._serialPortBase = 4999
   }
 
   async onAutoCompleteSerialCmd (query, args) {
@@ -34,31 +34,34 @@ class ITachIP2SLDevice extends ITachDevice {
 
   _sendSerial (connectorAddress, serialConfig, payload) {
     const configClient = new net.Socket()
-    configClient.connect(this._port, this._deviceData.ip, function () {
-      console.log('sending config', serialConfig)
+    configClient.connect(this._port, this._deviceData.ip, () => {
       configClient.end(serialConfig + '\r')
     })
 
-    const self = this
-    configClient.on('data', function (data) {
-      console.log('config response', data)
+    configClient.on('close', () => {
+      configClient.destroy()
+    })
 
+    const self = this
+    configClient.on('data', (data) => {
       configClient.destroy()
 
       const payloadClient = new net.Socket()
-      // TODO assign serial port according to module pos
-      payloadClient.connect(self._serialPort, self._deviceData.ip, function () {
-        console.log('sending payload', payload)
+
+      const [ , connectorLocation ] = connectorAddress.split(':')
+      const ix = parseInt(connectorLocation) - 1
+      const serialPort = this._serialPortBase + ix
+
+      payloadClient.connect(serialPort, self._deviceData.ip, () => {
         payloadClient.end(payload)
       })
 
-      payloadClient.on('data', function (data) {
-        console.log('payload response', data)
+      payloadClient.on('data', (data) => {
         payloadClient.destroy()
       })
 
-      payloadClient.on('close', function () {
-        console.log('payload connection closed')
+      payloadClient.on('close', () => {
+        payloadClient.destroy()
       })
     })
   }
