@@ -56,6 +56,10 @@ class ITachIP2SLDevice extends ITachDevice {
         console.log('payload response', data)
         payloadClient.destroy()
       })
+
+      payloadClient.on('close', function () {
+        console.log('payload connection closed')
+      })
     })
   }
 }
