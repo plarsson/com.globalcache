@@ -1,7 +1,7 @@
 const ITachDevice = require('../itachdevice')
 const net = require('net')
 
-class ITachIP2IRDevice extends ITachDevice {
+class ITachIP2SLDevice extends ITachDevice {
   onInit () {
     super.onInit()
     this._port = 4998
@@ -56,4 +56,4 @@ class ITachIP2IRDevice extends ITachDevice {
   }
 }
 
-module.exports = ITachIP2IRDevice
+module.exports = ITachIP2SLDevice
