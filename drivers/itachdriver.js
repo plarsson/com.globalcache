@@ -19,8 +19,8 @@ class ITachDriver extends Homey.Driver {
   }
 
   _onDiscoverDevice (deviceData) {
-    this.log('Device found:', deviceData.name, '@', deviceData.url)
     if (this.isSupported(deviceData.name)) {
+      this.log('Device found:', deviceData.name, '@', deviceData.url)
       let homeyDevice = this.getDevice({
         id: deviceData.uuid
       })
