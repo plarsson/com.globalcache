@@ -25,7 +25,7 @@ class ITachIP2CCDriver extends ITachDriver {
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2CC' || iTachDeviceName === 'iTachWF2CC'
+    return iTachDeviceName === 'iTachIP2CC'
   }
 }
 

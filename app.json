@@ -25,7 +25,7 @@
     {
         "id": "ip2ir",
         "name": {
-            "en": "IP2IR / WF2IR"
+            "en": "IP2IR"
         },
         "class": "other",
         "capabilities": [],
@@ -46,7 +46,7 @@
     {
         "id": "ip2cc",
         "name": {
-            "en": "IP2CC / WF2CC"
+            "en": "IP2CC"
         },
         "class": "other",
         "capabilities": [],
@@ -67,7 +67,7 @@
     {
       "id": "ip2sl",
       "name": {
-          "en": "IP2SL / WF2SL"
+          "en": "IP2SL"
       },
       "class": "other",
       "capabilities": [],
@@ -84,7 +84,70 @@
               "template": "add_devices"
           }
       ]
-  }
+    },
+    {
+        "id": "wf2ir",
+        "name": {
+            "en": "WF2IR"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [
+            {
+                "id": "list_devices",
+                "template": "list_devices",
+                "navigation": {
+                    "next": "add_devices"
+                }
+            },
+            {
+                "id": "add_devices",
+                "template": "add_devices"
+            }
+        ]
+    },
+    {
+        "id": "wf2cc",
+        "name": {
+            "en": "WF2CC"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [
+            {
+                "id": "list_devices",
+                "template": "list_devices",
+                "navigation": {
+                    "next": "add_devices"
+                }
+            },
+            {
+                "id": "add_devices",
+                "template": "add_devices"
+            }
+        ]
+    },
+    {
+    "id": "wf2sl",
+    "name": {
+        "en": "WF2SL"
+    },
+    "class": "other",
+    "capabilities": [],
+    "pair": [
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add_devices"
+            }
+        },
+        {
+            "id": "add_devices",
+            "template": "add_devices"
+        }
+    ]
+    }
   ],
   "flow": {
     "actions": [

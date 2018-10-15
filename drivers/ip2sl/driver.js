@@ -24,7 +24,7 @@ class ITachIP2SLDriver extends ITachDriver {
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'iTachWF2SL'
+    return iTachDeviceName === 'iTachIP2SL'
   }
 }
 
