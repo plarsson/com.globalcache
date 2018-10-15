@@ -4,7 +4,7 @@
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "name": {
-    "en": "globalcache"
+    "en": "Global Caché"
   },
   "description": {
     "en": "Adds support for globalcache"
