@@ -60,16 +60,18 @@ class ITachDevice extends Homey.Device {
         return acc
       }, [])
 
-      const irModule = modules.find(module => module.name === moduleName)
-      if (!irModule) {
+      const foundModules = modules.filter(module => module.name === moduleName)
+      if (!foundModules) {
         throw new Error('No ' + moduleName + ' module(s) found on this device')
       }
       const res = []
-      const moduleNumber = parseInt(irModule.moduleNumber)
-      const count = parseInt(irModule.count)
-      for (let i = 1; i <= count; i++) {
-        res.push(moduleNumber + ':' + i)
-      }
+      foundModules.forEach(foundModule => {
+        const moduleNumber = parseInt(foundModule.moduleNumber)
+        const count = parseInt(foundModule.count)
+        for (let i = 1; i <= count; i++) {
+          res.push(moduleNumber + ':' + i)
+        }
+      })
       self._moduleAddresses = res
       client.destroy()
     })
