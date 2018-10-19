@@ -14,8 +14,8 @@
   ],
   "permissions": [],
   "images": {
-    "large": "/assets/images/large.png",
-    "small": "/assets/images/small.png"
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
   },
   "author": {
     "name": "pln",
@@ -26,6 +26,10 @@
         "id": "ip2ir",
         "name": {
             "en": "IP2IR"
+        },
+        "images": {
+            "large": "/drivers/ip2ir/assets/images/large.jpg",
+            "small": "/drivers/ip2ir/assets/images/small.jpg"
         },
         "class": "other",
         "capabilities": [],
@@ -48,6 +52,10 @@
         "name": {
             "en": "IP2CC"
         },
+        "images": {
+            "large": "/drivers/ip2cc/assets/images/large.jpg",
+            "small": "/drivers/ip2cc/assets/images/small.jpg"
+        },
         "class": "other",
         "capabilities": [],
         "pair": [
@@ -68,6 +76,10 @@
       "id": "ip2sl",
       "name": {
           "en": "IP2SL"
+      },
+      "images": {
+          "large": "/drivers/ip2sl/assets/images/large.jpg",
+          "small": "/drivers/ip2sl/assets/images/small.jpg"
       },
       "class": "other",
       "capabilities": [],
@@ -90,6 +102,10 @@
         "name": {
             "en": "WF2IR"
         },
+        "images": {
+            "large": "/drivers/wf2ir/assets/images/large.jpg",
+            "small": "/drivers/wf2ir/assets/images/small.jpg"
+        },
         "class": "other",
         "capabilities": [],
         "pair": [
@@ -111,6 +127,10 @@
         "name": {
             "en": "WF2CC"
         },
+        "images": {
+            "large": "/drivers/wf2cc/assets/images/large.jpg",
+            "small": "/drivers/wf2cc/assets/images/small.jpg"
+        },
         "class": "other",
         "capabilities": [],
         "pair": [
@@ -131,6 +151,10 @@
     "id": "wf2sl",
     "name": {
         "en": "WF2SL"
+    },
+    "images": {
+        "large": "/drivers/wf2sl/assets/images/large.jpg",
+        "small": "/drivers/wf2sl/assets/images/small.jpg"
     },
     "class": "other",
     "capabilities": [],
