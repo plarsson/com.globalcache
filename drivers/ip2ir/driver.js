@@ -30,8 +30,7 @@ class ITachIP2IRDriver extends ITachDriver {
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2IR' ||
-      iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06'
+    return iTachDeviceName === 'iTachIP2IR' || iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06'
   }
 }
 
