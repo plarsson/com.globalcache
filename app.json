@@ -21,6 +21,13 @@
     "name": "pln",
     "email": ""
   },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "plarssonse"
+      }
+    }
+  },
   "drivers": [
     {
         "id": "ip2ir",
