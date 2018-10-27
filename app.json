@@ -188,7 +188,7 @@
 					"en": "Send Remote Command"
 				},
 				"args": [
-                    { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir" },
+                    { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir|wf2ir" },
                     {
                         "name": "connectoraddress",
                         "type": "autocomplete",
@@ -218,7 +218,7 @@
                 "en": "Send Remote Command"
             },
             "args": [
-                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc" },
+                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc" },
                 {
                     "name": "connectoraddress",
                     "type": "autocomplete",
@@ -241,7 +241,7 @@
                 "en": "Send Serial Command"
             },
             "args": [
-                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl" },
+                { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl|wf2sl" },
                 {
                     "name": "connectoraddress",
                     "type": "autocomplete",
