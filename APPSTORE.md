@@ -1,5 +1,11 @@
-### Global Cache for Homey
+## Global Cache for Homey
 
+### Whats new
+
+### v1.0.1 
+- Fixed flow for WF devices
+
+### About 
 This app adds support for 
 - iTach IP2IR
 - iTach IP2SL
