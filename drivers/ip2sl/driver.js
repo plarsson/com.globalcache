@@ -24,7 +24,8 @@ class ITachIP2SLDriver extends ITachDriver {
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12'
+    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12' ||
+      iTachDeviceName === 'iTachFlexEthernet'
   }
 }
 
