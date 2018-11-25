@@ -17,10 +17,11 @@ class ITachIP2CCDevice extends ITachDevice {
   async executeCommand (args) {
     const outputState = args.outputstate.name
     const connectorAddress = args.connectoraddress.name
-    this._sendState(connectorAddress, outputState)
+    const duration = args.duration
+    this._sendState(connectorAddress, outputState, duration)
   }
 
-  _sendState (connectorAddress, outputState) {
+  _sendState (connectorAddress, outputState, duration) {
     const cmd = []
     cmd.push('setstate')
     cmd.push(connectorAddress)
@@ -33,6 +34,9 @@ class ITachIP2CCDevice extends ITachDevice {
     })
 
     client.on('close', () => {
+      if(duration && duration > 0) {
+        setTimeout(() => { this._sendState(connectorAddress, outputState === STATE_CLOSED ? STATE_OPEN : STATE_CLOSED, null) }, duration) 
+      }
       client.destroy()
     })
 

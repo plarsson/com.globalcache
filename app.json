@@ -215,7 +215,7 @@
         {
             "id": "send_relay_command",
             "title": {
-                "en": "Send Remote Command"
+                "en": "Send Relay Command"
             },
             "args": [
                 { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc" },
@@ -232,6 +232,15 @@
                     "placeholder": {
                         "en": "state"
                     }
+                },
+                {
+                  "name": "duration",
+                  "type": "number",
+                  "min": 0,
+                  "max": 120000,
+                  "placeholder": {
+                      "en": "duration in milliseconds"
+                  }
                 }
             ]
         },
