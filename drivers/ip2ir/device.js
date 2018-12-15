@@ -72,6 +72,7 @@ class ITachIP2IRDevice extends ITachDevice {
     const self = this
 
     const client = new net.Socket()
+    client.setTimeout(10000)
 
     client.connect(this._port, this._deviceData.ip, async () => {
       sem.take(() => {
@@ -81,6 +82,10 @@ class ITachIP2IRDevice extends ITachDevice {
 
     client.on('close', () => {
       sem.leave()
+      client.destroy()
+    })
+
+    client.on('timeout', () => {
       client.destroy()
     })
 

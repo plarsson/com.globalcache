@@ -34,12 +34,18 @@ class ITachIP2SLDevice extends ITachDevice {
 
   _sendSerial (connectorAddress, serialConfig, payload) {
     const configClient = new net.Socket()
+    configClient.setTimeout(10000)
+
     configClient.connect(this._port, this._deviceData.ip, () => {
       configClient.end(serialConfig + '\r')
     })
 
     configClient.on('close', () => {
       configClient.destroy()
+    })
+
+    client.on('timeout', () => {
+      client.destroy()
     })
 
     const self = this

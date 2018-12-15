@@ -29,18 +29,24 @@ class ITachIP2CCDevice extends ITachDevice {
     const dataStr = cmd.join(',')
 
     const client = new net.Socket()
+    client.setTimeout(10000)
+
     client.connect(this._port, this._deviceData.ip, () => {
       client.write(dataStr + '\r')
     })
 
     client.on('close', () => {
-      if(duration && duration > 0) {
+      if (duration && duration > 0) {
         setTimeout(() => { this._sendState(connectorAddress, outputState === STATE_CLOSED ? STATE_OPEN : STATE_CLOSED, null) }, duration) 
       }
       client.destroy()
     })
 
     client.on('data', (data) => {
+      client.destroy()
+    })
+
+    client.on('timeout', () => {
       client.destroy()
     })
   }
