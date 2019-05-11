@@ -49,6 +49,10 @@ class ITachIP2CCDevice extends ITachDevice {
     client.on('timeout', () => {
       client.destroy()
     })
+
+    client.on('error', () => {
+      client.destroy()
+    })
   }
 }
 

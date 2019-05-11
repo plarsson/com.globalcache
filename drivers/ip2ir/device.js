@@ -89,6 +89,10 @@ class ITachIP2IRDevice extends ITachDevice {
       client.destroy()
     })
 
+    client.on('error', () => {
+      client.destroy()
+    })
+
     client.on('data', async (data) => {
       const dataStr = data.toString()
       if (dataStr.startsWith('ERR')) {
