@@ -1,63 +1,106 @@
 <!doctype html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css" media="screen">
             #editorcontainer {
-                height:80vh;
+                height:40vh;
             }
             #editor { 
                 width: 100%;
                 height: 100%;
             }
+            .upload-btn-wrapper {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+            }
+            .upload-btn-wrapper input[type=file] {
+                font-size: 100px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+            }
         </style>
     </head>
     <body>
-        <fieldset>
-            <legend>Raw editor</legend>
-            <div id="editorcontainer">
-                <div id="editor">{  
-    "ir": {
-        "devices": [ 
-            { 
-                "device": "tv",
-                "codes": [
-                    { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
-                    { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
-                ]
-            },
-            { 
-                "device": "receiver",
-                "codes": [
-                    { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
-                    { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
-                ]
-            }
-        ]
-    },
-    "serial": {
-        "baudrate": "9600",
-        "flowcontrol": "FLOW_NONE",
-        "parity": "PARITY_NO",
-        "cmds": [
-            { "name": "on", "value": "\u0002PON\u0003\u000D" },
-            { "name": "off", "value": "\u0002POF\u0003\u000D" }
-        ]
-    }
+        <div id="editorcontainer">
+            <div id="editor">{  
+"ir": {
+    "devices": [ 
+        { 
+            "device": "tv",
+            "codes": [
+                { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
+                { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
+            ]
+        },
+        { 
+            "device": "receiver",
+            "codes": [
+                { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
+                { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
+            ]
+        }
+    ]
+},
+"serial": {
+    "baudrate": "9600",
+    "flowcontrol": "FLOW_NONE",
+    "parity": "PARITY_NO",
+    "cmds": [
+        { "name": "on", "value": "\u0002PON\u0003\u000D" },
+        { "name": "off", "value": "\u0002POF\u0003\u000D" }
+    ]
 }
-                </div>
+}
             </div>
-        </fieldset>
-
-        <button id="save" class="right">Save changes</button>
+            <div style="margin-top: 20px">
+                <div class="upload-btn-wrapper left">
+                    <button class="btn">Import...</button>
+                    <input type="file" onchange="upload()" name="file" />
+                </div>
+                <button onclick="download('gc-settings.json')">Export...</button>
+                <button id="save" class="right">Save</button>
+            </div>
+        </div>
+        
 
         <script type="text/javascript">
 
-        function onHomeyReady( Homey ){
+        let editor;
 
-            var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
+        function upload() {
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                editor.session.setValue(event.target.result);
+            }
+            reader.readAsText(file);
+        }
+
+        function download(filename) {
+            const element = document.createElement('a');
+            const content = editor.session.getValue();
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function onHomeyReady( Homey ){
+            editor = ace.edit("editor");
+            editor.setOptions({
+                theme: "ace/theme/monokai",
+                minLines: 20,
+                maxLines: 20
+            });
+            editor.renderer.setShowGutter(false);
             editor.session.setMode("ace/mode/json");
             editor.commands.addCommand({
                 name: 'save',
@@ -77,9 +120,7 @@
                 }
             });
 
-            var usernameElement = document.getElementById('username');
-            var passwordElement = document.getElementById('password');
-            var saveElement = document.getElementById('save');
+            const saveElement = document.getElementById('save');
 
             saveElement.addEventListener('click', function(e) {
                 Homey.set('mapping', editor.getValue(), function( err ){
