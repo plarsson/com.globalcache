@@ -82,7 +82,7 @@
         <div title="Infra Red">
             <legend>Infra Red</legend>
             <div v-for="(device, deviceIndex) in ir.devices">
-                <input placeholder="Device Name" v-model="device.name">
+                <input placeholder="Device Name" v-model="device.device">
                 <button @click="deleteIRDevice(deviceIndex)">
                     x
                 </button>
@@ -161,7 +161,6 @@
                 this.ir.devices.push({ device: '', codes: [] });
             },
             deleteIRDevice: function (index) {
-                console.log(this.infraRedDevices);
                 this.ir.devices.splice(index, 1);
             },
             addIRCode: function (index) {

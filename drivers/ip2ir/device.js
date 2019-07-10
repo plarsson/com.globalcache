@@ -3,13 +3,13 @@ const net = require('net')
 const sem = require('semaphore')(1)
 
 class ITachIP2IRDevice extends ITachDevice {
-  onInit () {
+  onInit() {
     super.onInit()
     this._port = 4998
     this._jobid = 1
   }
 
-  async onAutoCompleteIrDevice (query, args) {
+  async onAutoCompleteIrDevice(query, args) {
     var mapping = super.getJsonConfig('ir')
 
     const devices = mapping.devices.map(device => device.device)
@@ -17,7 +17,7 @@ class ITachIP2IRDevice extends ITachDevice {
     return res
   }
 
-  async onAutoCompleteIrFunction (query, args) {
+  async onAutoCompleteIrFunction(query, args) {
     var mapping = super.getJsonConfig('ir')
 
     const selectedDevice = args.irdevice
@@ -27,7 +27,7 @@ class ITachIP2IRDevice extends ITachDevice {
     return res
   }
 
-  async executeCommand (args) {
+  async executeCommand(args) {
     var mapping = super.getJsonConfig('ir')
 
     const irDeviceName = args.irdevice.name
@@ -39,8 +39,8 @@ class ITachIP2IRDevice extends ITachDevice {
     await this._sendProntoCode(connectorAddress, irCode.value, 20)
   }
 
-  async _sendProntoCode (connectorAddress, prontoString, retries = 0) {
-    function sleep (ms = 0) {
+  async _sendProntoCode(connectorAddress, prontoString, retries = 0) {
+    function sleep(ms = 0) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
 

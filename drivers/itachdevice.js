@@ -35,6 +35,7 @@ class ITachDevice extends Homey.Device {
 
   getJsonConfig(section) {
     var json = Homey.ManagerSettings.get('mapping')
+
     if (!json) {
       return []
     }
@@ -61,17 +62,17 @@ class ITachDevice extends Homey.Device {
         return acc
       }, [])
       const foundModules = modules.filter(module => module != undefined && moduleNames.includes(module.name));
-     
+
       if (!foundModules) {
         throw new Error(`None of the specified module(s) (${moduleNames.join(', ')}) were found on this device`)
-      } 
+      }
       const res = []
       foundModules.forEach(foundModule => {
         const moduleNumber = parseInt(foundModule.moduleNumber)
         const count = multiChannelDevices !== undefined && multiChannelDevices.map(device => device.name).includes(foundModule.name)
           ? multiChannelDevices.filter(device => device.name === foundModule.name)[0].channels
           : parseInt(foundModule.count)
-        
+
         for (let i = 1; i <= count; i++) {
           res.push(`module ${moduleNumber} : port ${i}`)
         }
