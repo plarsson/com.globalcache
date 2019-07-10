@@ -19,13 +19,12 @@ class ITachIP2SLDriver extends ITachDriver {
       .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteSerialCmd(query, args) })
   }
 
-  supportedModuleType () {
-    return 'SERIAL'
+  supportedModuleTypes () {
+    return ['SERIAL']
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12' ||
-      iTachDeviceName === 'iTachFlexEthernet'
+    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12'
   }
 }
 

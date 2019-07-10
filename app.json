@@ -178,6 +178,31 @@
             "template": "add_devices"
         }
     ]
+    },
+    {
+        "id": "flexwifi",
+        "name": {
+            "en": "FLEXWIFI"
+        },
+        "images": {
+            "large": "/drivers/wf2ir/assets/images/large.jpg",
+            "small": "/drivers/wf2ir/assets/images/small.jpg"
+        },
+        "class": "other",
+        "capabilities": [],
+        "pair": [
+            {
+                "id": "list_devices",
+                "template": "list_devices",
+                "navigation": {
+                    "next": "add_devices"
+                }
+            },
+            {
+                "id": "add_devices",
+                "template": "add_devices"
+            }
+        ]
     }
   ],
   "flow": {
@@ -188,7 +213,7 @@
 					"en": "Send Remote Command"
 				},
 				"args": [
-                    { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir|wf2ir" },
+                    { "name": "device", "type": "device", "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir|wf2ir|flexwifi" },
                     {
                         "name": "connectoraddress",
                         "type": "autocomplete",

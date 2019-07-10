@@ -25,13 +25,12 @@ class ITachIP2IRDriver extends ITachDriver {
       .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteIrFunction(query, args) })
   }
 
-  supportedModuleType () {
-    return 'IR'
+  supportedModuleTypes () {
+    return ['IR']
   }
 
   isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2IR' || iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06' ||
-      iTachDeviceName === 'iTachFlexEthernet'
+    return iTachDeviceName === 'iTachIP2IR' || iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06'
   }
 }
 

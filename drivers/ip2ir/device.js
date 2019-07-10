@@ -56,7 +56,7 @@ class ITachIP2IRDevice extends ITachDevice {
 
     const header = []
     header.push('sendir')
-    header.push(connectorAddress)
+    header.push(connectorAddress.replace('module ', '').replace(' : port ', ':'))
     header.push(this._jobid % 65535) // id (job id)
     header.push(iTachRate)
     header.push(1)
