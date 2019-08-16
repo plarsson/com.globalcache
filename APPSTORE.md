@@ -2,6 +2,10 @@
 
 ### Whats new
 
+### v1.1.0
+- UI for Configuration
+- iTach Flex Support
+
 ### v1.0.1 
 - Fixed flow for WF devices
 
