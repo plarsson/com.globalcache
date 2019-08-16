@@ -1,133 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
-        <style type="text/css" media="screen">
-            #editorcontainer {
-                height:40vh;
-            }
-            #editor { 
-                width: 100%;
-                height: 100%;
-            }
-            .upload-btn-wrapper {
-                position: relative;
-                overflow: hidden;
-                display: inline-block;
-            }
-            .upload-btn-wrapper input[type=file] {
-                font-size: 100px;
-                position: absolute;
-                left: 0;
-                top: 0;
-                opacity: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="editorcontainer">
-            <div id="editor">{  
-"ir": {
-    "devices": [ 
-        { 
-            "device": "tv",
-            "codes": [
-                { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
-                { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
-            ]
-        },
-        { 
-            "device": "receiver",
-            "codes": [
-                { "name": "on", "value": "0000 0067 0000 0027 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0018 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03F5" },
-                { "name": "off", "value": "0000 0067 0000 0027 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03E8 0060 0018 0030 0018 0030 0018 0030 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 03DE" }
-            ]
+
+<head>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <title>
+        Settings
+    </title>
+    <style>
+        body {
+            padding: 0px;
+            font-family: Arial, Helvetica, sans-serif;
         }
-    ]
-},
-"serial": {
-    "baudrate": "9600",
-    "flowcontrol": "FLOW_NONE",
-    "parity": "PARITY_NO",
-    "cmds": [
-        { "name": "on", "value": "\u0002PON\u0003\u000D" },
-        { "name": "off", "value": "\u0002POF\u0003\u000D" }
-    ]
-}
-}
-            </div>
-            <div style="margin-top: 20px">
-                <div class="upload-btn-wrapper left">
-                    <button class="btn">Import...</button>
-                    <input type="file" onchange="upload()" name="file" />
+
+        input {
+            height: 20px !important;
+            width: 100px !important;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            margin-bottom: 5px;
+        }
+
+        .inline {
+            display: inline-block;
+        }
+
+        .itemLabel {
+            width: 100px;
+        }
+
+        .hiddenElement {
+            display: none;
+            width: 100%
+        }
+
+        #rawjsondisplayarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        #editorTitle {
+            color: #fff;
+        }
+
+        #editorTextArea {
+            width: 100%;
+            height: 500px;
+            font-family: 'Courier New', Courier, monospace
+        }
+
+        .overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 30px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div title="Infra Red">
+            <legend>Infra Red</legend>
+            <div v-for="(device, deviceIndex) in ir.devices">
+                <input placeholder="Device Name" v-model="device.device">
+                <button @click="deleteIRDevice(deviceIndex)">
+                    x
+                </button>
+                <div v-for="(code, codeIndex) in device.codes">
+                    <input placeholder="Code Name" v-model="code.name">
+                    <input placeholder="Code Value" class="code" v-model="code.value">
+                    <button @click="openFullScreenEditor(code)">...</button>
+                    <button @click="deleteIRCode(deviceIndex, codeIndex)">x</button>
                 </div>
-                <button onclick="download('gc-settings.json')">Export...</button>
-                <button id="save" class="right">Save</button>
+                <div><button @click="addIRCode(deviceIndex)">Add Command</button></div>
+            </div>
+            <button @click="addIRDevice(index)">
+                Add Device
+            </button>
+        </div>
+        <br />
+        <div title="Serial">
+            <legend>Serial</legend>
+            <div>
+                <div class="inline itemLabel">Baud Rate</div>
+                <div class="inline"><input placeholder="Baud Rate" v-model="serial.baudrate"></div>
+            </div>
+            <div>
+                <div class="inline itemLabel">Flow Control</div>
+                <div class="inline"><input placeholder="Flow Control" v-model="serial.flowcontrol"></div>
+            </div>
+            <div>
+                <div class="inline itemLabel">Parity</div>
+                <div class="inline"><input placeholder="Parity" v-model="serial.parity"></div>
+            </div>
+            <div v-for="(cmd, index) in serial.cmds">
+                <input placeholder="Command Name" v-model="cmd.name">
+                <input placeholder="Command Value" v-model="cmd.value">
+                <button @click="openFullScreenEditor(cmd)">...</button>
+                <button @click="deleteSerialCommand(index)">x</button>
+            </div>
+            <button @click="addSerialCommand(index)">Add Command</button>
+        </div>
+        <button @click="saveToHomey()">Save Configuration</button>
+        <button @click="openFullScreenEditor($dat, true)">Edit Raw</button>
+        <div id="rawjsondisplay">
+            <div>Raw JSON</div>
+            <pre id='rawjsondisplayarea'>{{ $data }}</pre>
+        </div>
+        <div id="fullScreenEditor" class="overlay">
+            <div class=overlay-content>
+                <div id="editorTitle"></div>
+                <div id="configWarning" class=" panel panel-warning">
+                    <div class="panel-heading">Warning this will overwrite any existing configuration</div>
+                </div>
+                <textarea id='editorTextArea'></textarea>
+                <button @click="fullScreenEditorOk">OK</button>
+                <button @click="fullScreenEditorCancel">Cancel</button>
             </div>
         </div>
-        
 
-        <script type="text/javascript">
-
-        let editor;
-
-        function upload() {
-            const file = document.querySelector('input[type=file]').files[0];
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                editor.session.setValue(event.target.result);
+    </div>
+    </div>
+</body>
+<script>
+    let viewModel = new Vue({
+        el: '#app',
+        data: {
+            ir: {
+                devices: [],
+            },
+            serial: {
+                baudrate: '9600',
+                flowcontrol: 'FLOW_NONE',
+                parity: 'PARITY_NO',
+                cmds: []
             }
-            reader.readAsText(file);
-        }
-
-        function download(filename) {
-            const element = document.createElement('a');
-            const content = editor.session.getValue();
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-            element.setAttribute('download', filename);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
-
-        function onHomeyReady( Homey ){
-            editor = ace.edit("editor");
-            editor.setOptions({
-                theme: "ace/theme/monokai",
-                minLines: 20,
-                maxLines: 20
-            });
-            editor.renderer.setShowGutter(false);
-            editor.session.setMode("ace/mode/json");
-            editor.commands.addCommand({
-                name: 'save',
-                bindKey: {win: "Ctrl-S", "mac": "Cmd-S"},
-                exec: function(editor) {
-                    Homey.set('mapping', editor.session.getValue(), function( err ){
-                        if( err ) return Homey.alert( err );
-                    });
+        },
+        methods: {
+            addIRDevice: function () {
+                this.ir.devices.push({ device: '', codes: [] });
+            },
+            deleteIRDevice: function (index) {
+                this.ir.devices.splice(index, 1);
+            },
+            addIRCode: function (index) {
+                this.ir.devices[index].codes.push({ name: '', value: '' });
+            },
+            deleteIRCode: function (deviceIndex, commandIndex) {
+                this.ir.devices[deviceIndex].codes.splice(commandIndex, 1);
+            },
+            addSerialCommand: function (index) {
+                this.serial.cmds.push({ name: '', value: '' });
+            },
+            deleteSerialCommand: function (index) {
+                this.serial.cmds.splice(index, 1);
+            },
+            getAsJson: function (obj) {
+                let data = {};
+                for (let d in obj.$data) {
+                    data[d] = obj.$data[d];
                 }
-            })
-
-            Homey.ready();
-
-            Homey.get('mapping', function( err, value ) {
-                if(value) {
-                    editor.session.setValue(value);
-                }
-            });
-
-            const saveElement = document.getElementById('save');
-
-            saveElement.addEventListener('click', function(e) {
-                Homey.set('mapping', editor.getValue(), function( err ){
-                    if( err ) return Homey.alert( err );
+                return JSON.stringify(data, null, 2);
+            },
+            loadFromJson(json) {
+                let obj = JSON.parse(json);
+                this.ir = obj.ir;
+                this.serial = obj.serial;
+            },
+            saveToHomey: function () {
+                let json = this.getAsJson(this);
+                Homey.set('mapping', json, function (err) {
+                    if (err) {
+                        return Homey.alert(err);
+                    } else {
+                    }
                 });
-            });
+                Homey.alert('Configuration saved');
+            },
+            openFullScreenEditor: function (obj, loadJson) {
+                if (loadJson) {
+                    this.currentObject = null;
+                    let json = this.getAsJson(this);
+                    document.getElementById('configWarning').style.display = 'block';
+                    document.getElementById('editorTitle').innerText = 'Raw JSON Editor';
+                    document.getElementById('editorTextArea').value = json;
+                } else {
+                    this.currentObject = obj;
+                    document.getElementById('configWarning').style.display = 'none';
+                    document.getElementById('editorTitle').innerText = 'Command Editor';
+                    document.getElementById('editorTextArea').value = obj.value;
+                }
+                document.getElementById("fullScreenEditor").style.width = "100%";
+            },
+            fullScreenEditorOk: function () {
+                let editorText = document.getElementById('editorTextArea').value;
+                document.getElementById('fullScreenEditor').style.width = '0%';
+                if (this.currentObject) {
+                    this.currentObject.value = editorText;
+                } else {
+                    this.loadFromJson(editorText);
+                }
+            },
+            fullScreenEditorCancel: function () {
+                document.getElementById('fullScreenEditor').style.width = '0%';
+            }
+
         }
-        </script>
-    </body>
+    });
+    function onHomeyReady(Homey) {
+        Homey.ready();
+
+        Homey.get('mapping', function (err, value) {
+            if (value) {
+                viewModel.loadFromJson(value);
+            }
+        });
+    }
+</script>
+
 </html>

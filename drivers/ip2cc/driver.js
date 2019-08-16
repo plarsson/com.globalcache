@@ -20,8 +20,8 @@ class ITachIP2CCDriver extends ITachDriver {
       .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteOutputState(query, args) })
   }
 
-  supportedModuleType () {
-    return 'RELAY'
+  supportedModuleTypes () {
+    return ['RELAY']
   }
 
   isSupported (iTachDeviceName) {

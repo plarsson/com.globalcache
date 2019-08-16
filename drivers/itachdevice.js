@@ -1,10 +1,11 @@
+'use strict'
 const Homey = require('homey')
 var net = require('net')
 
 // https://www.globalcache.com/files/docs/API-iTach.pdf
 
 class ITachDevice extends Homey.Device {
-  onInit () {
+  onInit() {
     this.log('device init')
     this.log('name:', this.getName())
     this.log('class:', this.getClass())
@@ -12,29 +13,29 @@ class ITachDevice extends Homey.Device {
     this._moduleAddresses = null
   }
 
-  onAdded () {
+  onAdded() {
     this.log('device added')
   }
 
-  onDeleted () {
+  onDeleted() {
     this.log('device deleted')
   }
 
-  async onAutoCompleteConnectorAddress (query, args) {
+  async onAutoCompleteConnectorAddress(query, args) {
     const res = this._moduleAddresses.map(v => { return { 'name': v } })
     return res
   }
 
-  refresh (supportedModuleType, deviceData) {
+  refresh(supportedModuleTypes, deviceData, multiChannelDevices) {
     this._deviceData = deviceData
-    // console.log('deviceData refreshed', this._deviceData)
     if (!this._moduleAddresses) {
-      this._getModuleAddresses(supportedModuleType)
+      this._getModuleAddresses(supportedModuleTypes, multiChannelDevices)
     }
   }
 
-  getJsonConfig (section) {
+  getJsonConfig(section) {
     var json = Homey.ManagerSettings.get('mapping')
+
     if (!json) {
       return []
     }
@@ -42,7 +43,7 @@ class ITachDevice extends Homey.Device {
     return mapping[section]
   }
 
-  _getModuleAddresses (moduleName) {
+  _getModuleAddresses(moduleNames, multiChannelDevices) {
     const self = this
     const client = new net.Socket()
     client.connect(this._port, this._deviceData.ip, function () {
@@ -57,19 +58,23 @@ class ITachDevice extends Homey.Device {
           const [, moduleNumber, count] = spec.split(',')
           acc.push({ name, moduleNumber, count })
         }
+
         return acc
       }, [])
+      const foundModules = modules.filter(module => module != undefined && moduleNames.includes(module.name));
 
-      const foundModules = modules.filter(module => module.name === moduleName)
       if (!foundModules) {
-        throw new Error('No ' + moduleName + ' module(s) found on this device')
+        throw new Error(`None of the specified module(s) (${moduleNames.join(', ')}) were found on this device`)
       }
       const res = []
       foundModules.forEach(foundModule => {
         const moduleNumber = parseInt(foundModule.moduleNumber)
-        const count = parseInt(foundModule.count)
+        const count = multiChannelDevices !== undefined && multiChannelDevices.map(device => device.name).includes(foundModule.name)
+          ? multiChannelDevices.filter(device => device.name === foundModule.name)[0].channels
+          : parseInt(foundModule.count)
+
         for (let i = 1; i <= count; i++) {
-          res.push(moduleNumber + ':' + i)
+          res.push(`module ${moduleNumber} : port ${i}`)
         }
       })
       self._moduleAddresses = res

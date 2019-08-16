@@ -2,42 +2,51 @@ const Homey = require('homey')
 const discover = require('../../lib/discover')
 
 class ITachDriver extends Homey.Driver {
-  onInit () {
+  onInit() {
+    this.log('ITachDriver onInit called')
     this._discover = discover
       .on('device', this._onDiscoverDevice.bind(this))
       .on('rediscover', this._onDiscoverDevice.bind(this))
   }
 
   // overide by subclass
-  isSupported (itachDeviceName) {
+  isSupported(itachDeviceName) {
     return false
   }
 
   // overide by subclass
-  supportedModuleType () {
-    return ''
+  supportedModuleTypes() {
+    return ['']
   }
 
-  _onDiscoverDevice (deviceData) {
+  // overide by subclass
+  multiChannelDevices() {
+    return []
+  }
+
+  _onDiscoverDevice(deviceData) {
     if (this.isSupported(deviceData.name)) {
-      this.log('Device found:', deviceData.name, '@', deviceData.url)
+      //this.log('Device found:', deviceData.name, '@', deviceData.url, ' ', deviceData.uuid)
+
       let homeyDevice = this.getDevice({
         id: deviceData.uuid
       })
+      
       if (homeyDevice instanceof Homey.Device) {
-        homeyDevice.refresh(this.supportedModuleType(), deviceData)
+        homeyDevice.refresh(this.supportedModuleTypes(), deviceData, this.multiChannelDevices())
       }
     }
   }
 
-  _executeCommand (args, state) {
+  _executeCommand(args, state) {
     return args.device.executeCommand(args)
   }
 
-  onPair (socket) {
+  onPair(socket) {
+    this.log('onPair called')
     socket.on('list_devices', (data, callback) => {
       const devicesObj = this._discover.getDevices()
-
+      this.log(`Devices found ${devicesObj.length}`)
       if (devicesObj.length === 0) {
         return callback(new Error(Homey.__('pair_none_found')))
       }
