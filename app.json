@@ -24,6 +24,9 @@
     "contributors": {
         "developers": [
             {
+                "name": "Peter Larsson"
+            },
+            {
                 "name": "Siobhan Baynes"
             }
         ]
@@ -192,8 +195,8 @@
                 "en": "FLEXWIFI"
             },
             "images": {
-                "large": "/drivers/wf2ir/assets/images/large.jpg",
-                "small": "/drivers/wf2ir/assets/images/small.jpg"
+                "large": "/drivers/flexwifi/assets/images/large.jpg",
+                "small": "/drivers/flexwifi/assets/images/small.jpg"
             },
             "class": "other",
             "capabilities": [],
@@ -217,8 +220,8 @@
                 "en": "FLEXETHERNET"
             },
             "images": {
-                "large": "/drivers/wf2ir/assets/images/large.jpg",
-                "small": "/drivers/wf2ir/assets/images/small.jpg"
+                "large": "/drivers/flexethernet/assets/images/large.jpg",
+                "small": "/drivers/flexethernet/assets/images/small.jpg"
             },
             "class": "other",
             "capabilities": [],
