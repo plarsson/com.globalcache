@@ -2,9 +2,12 @@
 
 ### Whats new
 
+### v1.1.1
+- Corrected Flex images
+
 ### v1.1.0
 - UI for Configuration
-- iTach Flex Support
+- Flex Support
 
 ### v1.0.1 
 - Fixed flow for WF devices
@@ -18,6 +21,7 @@ This app adds support for
 - iTach WF2SL
 - iTach WF2CC
 - GC-100-06, -12 and -18 (emulated via IP2IR, IP2SL, IP2CC)
+- Flex
 
 ### Configuration 
 - IR codes must be in PRONTO format eg. 0000 0067 0000 0027 0060 0018 ... 
