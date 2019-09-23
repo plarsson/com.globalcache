@@ -17,7 +17,7 @@ class ITachIP2CCDevice extends ITachDevice {
   async executeCommand (args) {
     const outputState = args.outputstate.name
     const connectorAddress = args.connectoraddress.name
-    const duration = args.duration
+    const duration = args.ccduration
     this._sendState(connectorAddress, outputState, duration)
   }
 

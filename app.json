@@ -300,9 +300,36 @@
                         "placeholder": {
                             "en": "state"
                         }
+                    }
+                ]
+            },
+            {
+                "id": "send_relay_command_with_duration",
+                "title": {
+                    "en": "Send Relay Command With Duration"
+                },
+                "args": [
+                    {
+                        "name": "device",
+                        "type": "device",
+                        "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
                     },
                     {
-                        "name": "duration",
+                        "name": "connectoraddress",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "iTach connector"
+                        }
+                    },
+                    {
+                        "name": "outputstate",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "state"
+                        }
+                    },
+                    {
+                        "name": "ccduration",
                         "type": "number",
                         "min": 0,
                         "max": 120000,
