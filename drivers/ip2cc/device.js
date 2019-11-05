@@ -24,7 +24,7 @@ class ITachIP2CCDevice extends ITachDevice {
   _sendState (connectorAddress, outputState, duration) {
     const cmd = []
     cmd.push('setstate')
-    cmd.push(connectorAddress)
+    cmd.push(connectorAddress.replace('module ', '').replace(' : port ', ':'))
     cmd.push(outputState === STATE_CLOSED ? 1 : 0)
     const dataStr = cmd.join(',')
 
