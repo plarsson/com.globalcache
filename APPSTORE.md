@@ -4,6 +4,7 @@
 
 ### v1.1.1
 - Corrected Flex images
+- Corrected connector address for SL/CC devices
 
 ### v1.1.0
 - UI for Configuration
