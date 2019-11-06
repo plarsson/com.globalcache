@@ -7,6 +7,8 @@ class ITachIP2CCDriver extends ITachDriver {
     super.onInit()
 
     this.actionSendCmd = new Homey.FlowCardAction('send_relay_command')
+    this.actionSendCmdWithDuration = new Homey.FlowCardAction('send_relay_command_with_duration')
+
     this.actionSendCmd
       .register()
       .registerRunListener(this._executeCommand.bind(this))
@@ -14,6 +16,18 @@ class ITachIP2CCDriver extends ITachDriver {
       .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteConnectorAddress(query, args) })
 
     this.actionSendCmd
+      .register()
+      .registerRunListener(this._executeCommand.bind(this))
+      .getArgument('outputstate')
+      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteOutputState(query, args) })
+
+    this.actionSendCmdWithDuration
+      .register()
+      .registerRunListener(this._executeCommand.bind(this))
+      .getArgument('connectoraddress')
+      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteConnectorAddress(query, args) })
+
+    this.actionSendCmdWithDuration
       .register()
       .registerRunListener(this._executeCommand.bind(this))
       .getArgument('outputstate')

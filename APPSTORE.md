@@ -2,6 +2,9 @@
 
 ### Whats new
 
+### v1.1.2
+- Corrected autocompletion for CC devices "Send Relay Command With Duration" 
+
 ### v1.1.1
 - Corrected Flex images
 - Corrected connector address for SL/CC devices
