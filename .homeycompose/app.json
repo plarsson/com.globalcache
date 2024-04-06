@@ -1,0 +1,53 @@
+{
+  "id": "com.globalcache",
+  "version": "1.1.2",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "Global Caché"
+  },
+  "description": {
+    "en": "Global Cache for Homey"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "pln",
+    "email": ""
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Peter Larsson"
+      },
+      {
+        "name": "Siobhan Baynes"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "plarssonse"
+      }
+    }
+  },
+  "homeyCommunityTopicId": 2338,
+  "source": "https://github.com/plarsson/com.globalcache",
+  "api": {
+    "loadConfig": {
+      "method": "get",
+      "path": "/config"
+    },
+    "saveConfig": {
+      "method": "post",
+      "path": "/config"
+    }
+  }
+}

@@ -34,7 +34,7 @@ class ITachDevice extends Homey.Device {
   }
 
   getJsonConfig(section) {
-    var json = Homey.ManagerSettings.get('mapping')
+    var json = this.homey.settings.get('mapping')
 
     if (!json) {
       return []

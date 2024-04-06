@@ -1,31 +1,32 @@
-const Homey = require('homey')
-const ITachDriver = require('../itachdriver')
+const { Driver } = require('homey');
+const ITachDriver = require('../itachdriver');
 
 class ITachIP2SLDriver extends ITachDriver {
-  onInit () {
-    super.onInit()
+  async onInit() {
+    super.onInit();
 
-    this.actionSendCmd = new Homey.FlowCardAction('send_serial_command')
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('connectoraddress')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteConnectorAddress(query, args) })
+    this.actionSendCmd = this.homey.flow.getActionCard('send_serial_command');
 
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('serialcmd')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteSerialCmd(query, args) })
+    this.actionSendCmd.registerRunListener(async (args, state) => {
+      return this._executeCommand(args, state);
+    });
+
+    this.actionSendCmd.getArgument('connectoraddress').registerAutocompleteListener(async (query, args) => {
+      return args.device.onAutoCompleteConnectorAddress(query, args);
+    });
+
+    this.actionSendCmd.getArgument('serialcmd').registerAutocompleteListener(async (query, args) => {
+      return args.device.onAutoCompleteSerialCmd(query, args);
+    });
   }
 
-  supportedModuleTypes () {
-    return ['SERIAL']
+  supportedModuleTypes() {
+    return ['SERIAL'];
   }
 
-  isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12'
+  isSupported(iTachDeviceName) {
+    return iTachDeviceName === 'iTachIP2SL' || iTachDeviceName === 'GC-100-06' || iTachDeviceName === 'GC-100-12';
   }
 }
 
-module.exports = ITachIP2SLDriver
+module.exports = ITachIP2SLDriver;
