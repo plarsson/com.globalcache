@@ -1,13 +1,14 @@
 {
   "id": "com.globalcache",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
+  "brandColor": "#d71d4b",
   "name": {
     "en": "Global Caché"
   },
   "description": {
-    "en": "Global Cache for Homey"
+    "en": "Connect IR, Serial, and Relay to Almost Any Network"
   },
   "category": [
     "appliances"
