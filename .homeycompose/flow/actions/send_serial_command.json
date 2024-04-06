@@ -1,0 +1,27 @@
+{
+    "id": "send_serial_command",
+    "title": {
+        "en": "Send Serial Command"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl|wf2sl"
+        },
+        {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+                "en": "iTach connector"
+            }
+        },
+        {
+            "name": "serialcmd",
+            "type": "autocomplete",
+            "placeholder": {
+                "en": "Serial cmd name"
+            }
+        }
+    ]
+}

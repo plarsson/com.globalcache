@@ -1,0 +1,27 @@
+{
+    "id": "send_relay_command",
+    "title": {
+        "en": "Send Relay Command"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
+        },
+        {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+                "en": "iTach connector"
+            }
+        },
+        {
+            "name": "outputstate",
+            "type": "autocomplete",
+            "placeholder": {
+                "en": "state"
+            }
+        }
+    ]
+}

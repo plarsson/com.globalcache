@@ -28,12 +28,16 @@ class ITachDriver extends Homey.Driver {
     if (this.isSupported(deviceData.name)) {
       //this.log('Device found:', deviceData.name, '@', deviceData.url, ' ', deviceData.uuid)
 
-      let homeyDevice = this.getDevice({
-        id: deviceData.uuid
-      })
-      
-      if (homeyDevice instanceof Homey.Device) {
-        homeyDevice.refresh(this.supportedModuleTypes(), deviceData, this.multiChannelDevices())
+      try {
+        let homeyDevice = this.getDevice({
+          id: deviceData.uuid
+        })
+        
+        if (homeyDevice instanceof Homey.Device) {
+          homeyDevice.refresh(this.supportedModuleTypes(), deviceData, this.multiChannelDevices())
+        }
+      } catch (error) {
+        // ignore
       }
     }
   }
@@ -42,36 +46,37 @@ class ITachDriver extends Homey.Driver {
     return args.device.executeCommand(args)
   }
 
-  onPair(socket) {
+  onPair(session) {
     this.log('onPair called')
-    socket.on('list_devices', (data, callback) => {
-      const devicesObj = this._discover.getDevices()
-      this.log(`Devices found ${devicesObj.length}`)
+    session.setHandler('list_devices', async () => {
+      const devicesObj = this._discover.getDevices();
+      this.log(`Devices found ${devicesObj.length}`);
+  
       if (devicesObj.length === 0) {
-        return callback(new Error(Homey.__('pair_none_found')))
+        throw new Error(this.homey.__('pair_none_found'));
       }
-
-      let devicesArr = []
-
+  
+      let devicesArr = [];
+  
       for (let id in devicesObj) {
-        let device = devicesObj[id]
-
+        let device = devicesObj[id];
+  
         if (this.isSupported(device.name)) {
           devicesArr.push({
             data: {
-              id: device.uuid
+              id: device.uuid,
             },
-            name: device.name + ` (${device.ip})`
-          })
+            name: `${device.name} (${device.ip})`,
+          });
         }
       }
-
+  
       if (devicesArr.length === 0) {
-        return callback(new Error(Homey.__('pair_none_found')))
+        throw new Error(this.homey.__('pair_none_found'));
       }
-
-      callback(null, devicesArr)
-    })
+  
+      return devicesArr;
+    });
   }
 }
 

@@ -1,0 +1,54 @@
+{
+  "id": "com.globalcache",
+  "version": "1.2.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#d71d4b",
+  "name": {
+    "en": "Global Caché"
+  },
+  "description": {
+    "en": "Connect IR, Serial, and Relay to Almost Any Network"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "pln",
+    "email": ""
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Peter Larsson"
+      },
+      {
+        "name": "Siobhan Baynes"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "plarssonse"
+      }
+    }
+  },
+  "homeyCommunityTopicId": 2338,
+  "source": "https://github.com/plarsson/com.globalcache",
+  "api": {
+    "loadConfig": {
+      "method": "get",
+      "path": "/config"
+    },
+    "saveConfig": {
+      "method": "post",
+      "path": "/config"
+    }
+  }
+}

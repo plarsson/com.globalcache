@@ -1,37 +1,36 @@
-
-const Homey = require('homey')
-const ITachDriver = require('../itachdriver')
+const { Driver } = require('homey');
+const ITachDriver = require('../itachdriver');
 
 class ITachIP2IRDriver extends ITachDriver {
-  onInit () {
-    super.onInit()
+  async onInit() {
+    super.onInit();
 
-    this.actionSendCmd = new Homey.FlowCardAction('send_ir_command')
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('connectoraddress')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteConnectorAddress(query, args) })
+    this.actionSendCmd = this.homey.flow.getActionCard('send_ir_command');
 
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('irdevice')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteIrDevice(query, args) })
-    this.actionSendCmd
-      .register()
-      .registerRunListener(this._executeCommand.bind(this))
-      .getArgument('irfunction')
-      .registerAutocompleteListener((query, args) => { return args.device.onAutoCompleteIrFunction(query, args) })
+    this.actionSendCmd.registerRunListener(async (args, state) => {
+      return this._executeCommand(args, state);
+    });
+
+    this.actionSendCmd.getArgument('connectoraddress').registerAutocompleteListener(async (query, args) => {
+      return args.device.onAutoCompleteConnectorAddress(query, args);
+    });
+
+    this.actionSendCmd.getArgument('irdevice').registerAutocompleteListener(async (query, args) => {
+      return args.device.onAutoCompleteIrDevice(query, args);
+    });
+
+    this.actionSendCmd.getArgument('irfunction').registerAutocompleteListener(async (query, args) => {
+      return args.device.onAutoCompleteIrFunction(query, args);
+    });
   }
 
-  supportedModuleTypes () {
-    return ['IR']
+  supportedModuleTypes() {
+    return ['IR'];
   }
 
-  isSupported (iTachDeviceName) {
-    return iTachDeviceName === 'iTachIP2IR' || iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06'
+  isSupported(iTachDeviceName) {
+    return iTachDeviceName === 'iTachIP2IR' || iTachDeviceName === 'GC-100-12' || iTachDeviceName === 'GC-100-06';
   }
 }
 
-module.exports = ITachIP2IRDriver
+module.exports = ITachIP2IRDriver;

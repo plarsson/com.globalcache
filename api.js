@@ -1,33 +1,14 @@
 const Homey = require('homey')
 
-module.exports = [
-  {
-    method: 'GET',
-    path: '/config',
-    public: true,
-    fn: async (args, callback) => {
-      try {
-        const val = await Homey.ManagerSettings.get('mapping')
-        const result = JSON.parse(val)
-        callback(null, result)
-      } catch (err) {
-        callback(err, null)
-      }
-    }
+module.exports = {
+  async loadConfig({ homey, query }) {
+    const val = await this.homey.settings.get('mapping')
+    const result = JSON.parse(val)
+    return result;
   },
-  {
-    method: 'POST',
-    path: '/config',
-    public: true,
-    fn: async (args, callback) => {
-      try {
-        const val = JSON.stringify(args.body, null, 2)
-        Homey.ManagerSettings.set('mapping', val)
-        callback(null, {})
-      } catch (err) {
-        callback(err, null)
-      }
-    }
+  async saveConfig({ homey, query }) {
+    const val = JSON.stringify(query, null, 2)
+    this.homey.settings.set('mapping', val)
+    return {}
   }
-
-]
+}

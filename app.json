@@ -1,371 +1,385 @@
 {
-    "id": "com.globalcache",
-    "version": "1.1.2",
-    "compatibility": ">=1.5.0",
-    "sdk": 2,
-    "name": {
-        "en": "Global Caché"
-    },
-    "description": {
-        "en": "Global Cache for Homey"
-    },
-    "category": [
-        "appliances"
-    ],
-    "permissions": [],
-    "images": {
-        "large": "/assets/images/large.jpg",
-        "small": "/assets/images/small.jpg"
-    },
-    "author": {
-        "name": "pln",
-        "email": ""
-    },
-    "contributors": {
-        "developers": [
-            {
-                "name": "Peter Larsson"
-            },
-            {
-                "name": "Siobhan Baynes"
-            }
-        ]
-    },
-    "contributing": {
-        "donate": {
-            "paypal": {
-                "username": "plarssonse"
-            }
-        }
-    },
-    "drivers": [
-        {
-            "id": "ip2ir",
-            "name": {
-                "en": "IP2IR"
-            },
-            "images": {
-                "large": "/drivers/ip2ir/assets/images/large.jpg",
-                "small": "/drivers/ip2ir/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "ip2cc",
-            "name": {
-                "en": "IP2CC"
-            },
-            "images": {
-                "large": "/drivers/ip2cc/assets/images/large.jpg",
-                "small": "/drivers/ip2cc/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "ip2sl",
-            "name": {
-                "en": "IP2SL"
-            },
-            "images": {
-                "large": "/drivers/ip2sl/assets/images/large.jpg",
-                "small": "/drivers/ip2sl/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "wf2ir",
-            "name": {
-                "en": "WF2IR"
-            },
-            "images": {
-                "large": "/drivers/wf2ir/assets/images/large.jpg",
-                "small": "/drivers/wf2ir/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "wf2cc",
-            "name": {
-                "en": "WF2CC"
-            },
-            "images": {
-                "large": "/drivers/wf2cc/assets/images/large.jpg",
-                "small": "/drivers/wf2cc/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "wf2sl",
-            "name": {
-                "en": "WF2SL"
-            },
-            "images": {
-                "large": "/drivers/wf2sl/assets/images/large.jpg",
-                "small": "/drivers/wf2sl/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "flexwifi",
-            "name": {
-                "en": "FLEXWIFI"
-            },
-            "images": {
-                "large": "/drivers/flexwifi/assets/images/large.jpg",
-                "small": "/drivers/flexwifi/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        },
-        {
-            "id": "flexethernet",
-            "name": {
-                "en": "FLEXETHERNET"
-            },
-            "images": {
-                "large": "/drivers/flexethernet/assets/images/large.jpg",
-                "small": "/drivers/flexethernet/assets/images/small.jpg"
-            },
-            "class": "other",
-            "capabilities": [],
-            "pair": [
-                {
-                    "id": "list_devices",
-                    "template": "list_devices",
-                    "navigation": {
-                        "next": "add_devices"
-                    }
-                },
-                {
-                    "id": "add_devices",
-                    "template": "add_devices"
-                }
-            ]
-        }
-    ],
-    "flow": {
-        "actions": [
-            {
-                "id": "send_ir_command",
-                "title": {
-                    "en": "Send Remote Command"
-                },
-                "args": [
-                    {
-                        "name": "device",
-                        "type": "device",
-                        "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir|wf2ir|flexwifi"
-                    },
-                    {
-                        "name": "connectoraddress",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "iTach connector"
-                        }
-                    },
-                    {
-                        "name": "irdevice",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "IR device name"
-                        }
-                    },
-                    {
-                        "name": "irfunction",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "IR function name"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "send_relay_command",
-                "title": {
-                    "en": "Send Relay Command"
-                },
-                "args": [
-                    {
-                        "name": "device",
-                        "type": "device",
-                        "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
-                    },
-                    {
-                        "name": "connectoraddress",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "iTach connector"
-                        }
-                    },
-                    {
-                        "name": "outputstate",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "state"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "send_relay_command_with_duration",
-                "title": {
-                    "en": "Send Relay Command With Duration"
-                },
-                "args": [
-                    {
-                        "name": "device",
-                        "type": "device",
-                        "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
-                    },
-                    {
-                        "name": "connectoraddress",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "iTach connector"
-                        }
-                    },
-                    {
-                        "name": "outputstate",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "state"
-                        }
-                    },
-                    {
-                        "name": "ccduration",
-                        "type": "number",
-                        "min": 0,
-                        "max": 120000,
-                        "placeholder": {
-                            "en": "duration in milliseconds"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": "send_serial_command",
-                "title": {
-                    "en": "Send Serial Command"
-                },
-                "args": [
-                    {
-                        "name": "device",
-                        "type": "device",
-                        "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl|wf2sl"
-                    },
-                    {
-                        "name": "connectoraddress",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "iTach connector"
-                        }
-                    },
-                    {
-                        "name": "serialcmd",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "Serial cmd name"
-                        }
-                    }
-                ]
-            }
-        ]
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.globalcache",
+  "version": "1.2.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#d71d4b",
+  "name": {
+    "en": "Global Caché"
+  },
+  "description": {
+    "en": "Connect IR, Serial, and Relay to Almost Any Network"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "pln",
+    "email": ""
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Peter Larsson"
+      },
+      {
+        "name": "Siobhan Baynes"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "plarssonse"
+      }
     }
+  },
+  "homeyCommunityTopicId": 2338,
+  "source": "https://github.com/plarsson/com.globalcache",
+  "api": {
+    "loadConfig": {
+      "method": "get",
+      "path": "/config"
+    },
+    "saveConfig": {
+      "method": "post",
+      "path": "/config"
+    }
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "send_ir_command",
+        "title": {
+          "en": "Send Ir Command"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2ir|wf2ir|flexwifi"
+          },
+          {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "iTach connector"
+            }
+          },
+          {
+            "name": "irdevice",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "IR device name"
+            }
+          },
+          {
+            "name": "irfunction",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "IR function name"
+            }
+          }
+        ]
+      },
+      {
+        "id": "send_relay_command",
+        "title": {
+          "en": "Send Relay Command"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
+          },
+          {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "iTach connector"
+            }
+          },
+          {
+            "name": "outputstate",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "state"
+            }
+          }
+        ]
+      },
+      {
+        "id": "send_relay_command_with_duration",
+        "title": {
+          "en": "Send Relay Command With Duration"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2cc|wf2cc"
+          },
+          {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "iTach connector"
+            }
+          },
+          {
+            "name": "outputstate",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "state"
+            }
+          },
+          {
+            "name": "ccduration",
+            "type": "number",
+            "min": 0,
+            "max": 120000,
+            "placeholder": {
+              "en": "duration in milliseconds"
+            }
+          }
+        ]
+      },
+      {
+        "id": "send_serial_command",
+        "title": {
+          "en": "Send Serial Command"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_uri=homey:app:com.globalcache&driver_id=ip2sl|wf2sl"
+          },
+          {
+            "name": "connectoraddress",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "iTach connector"
+            }
+          },
+          {
+            "name": "serialcmd",
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Serial cmd name"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "FLEXETHERNET"
+      },
+      "images": {
+        "large": "/drivers/flexethernet/assets/images/large.jpg",
+        "small": "/drivers/flexethernet/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "flexethernet"
+    },
+    {
+      "name": {
+        "en": "FLEXWIFI"
+      },
+      "images": {
+        "large": "/drivers/flexwifi/assets/images/large.jpg",
+        "small": "/drivers/flexwifi/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "flexwifi"
+    },
+    {
+      "name": {
+        "en": "IP2CC"
+      },
+      "images": {
+        "large": "/drivers/ip2cc/assets/images/large.jpg",
+        "small": "/drivers/ip2cc/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "ip2cc"
+    },
+    {
+      "name": {
+        "en": "IP2IR"
+      },
+      "images": {
+        "large": "/drivers/ip2ir/assets/images/large.jpg",
+        "small": "/drivers/ip2ir/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "ip2ir"
+    },
+    {
+      "name": {
+        "en": "IP2SL"
+      },
+      "images": {
+        "large": "/drivers/ip2sl/assets/images/large.jpg",
+        "small": "/drivers/ip2sl/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "ip2sl"
+    },
+    {
+      "name": {
+        "en": "WF2CC"
+      },
+      "images": {
+        "large": "/drivers/wf2cc/assets/images/large.jpg",
+        "small": "/drivers/wf2cc/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "wf2cc"
+    },
+    {
+      "name": {
+        "en": "WF2IR"
+      },
+      "images": {
+        "large": "/drivers/wf2ir/assets/images/large.jpg",
+        "small": "/drivers/wf2ir/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "wf2ir"
+    },
+    {
+      "name": {
+        "en": "WF2SL"
+      },
+      "images": {
+        "large": "/drivers/wf2sl/assets/images/large.jpg",
+        "small": "/drivers/wf2sl/assets/images/small.jpg"
+      },
+      "class": "other",
+      "capabilities": [],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "wf2sl"
+    }
+  ]
 }
