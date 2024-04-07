@@ -4,5 +4,8 @@
   },
   "1.2.0": {
     "en": "Homey SDK 3 compatibility"
+  },
+  "1.2.1": {
+    "en": "Corrected discover"
   }
 }
