@@ -1,5 +1,8 @@
 {
   "1.1.2": {
     "en": "Corrected autocompletion for CC devices \"Send Relay Command With Duration\""
+  },
+  "1.2.0": {
+    "en": "Homey SDK 3 compatibility"
   }
 }

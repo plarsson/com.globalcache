@@ -1,5 +1,5 @@
 const Homey = require('homey')
-const discover = require('../../lib/discover')
+const discover = require('../lib/discover')
 
 class ITachDriver extends Homey.Driver {
   onInit() {
