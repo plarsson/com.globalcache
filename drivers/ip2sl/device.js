@@ -44,8 +44,8 @@ class ITachIP2SLDevice extends ITachDevice {
       configClient.destroy()
     })
 
-    client.on('timeout', () => {
-      client.destroy()
+    configClient.on('timeout', () => {
+      configClient.destroy()
     })
 
     const self = this
