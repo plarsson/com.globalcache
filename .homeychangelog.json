@@ -7,5 +7,8 @@
   },
   "1.2.1": {
     "en": "Corrected discover"
+  },
+  "1.2.2": {
+    "en": "Fixed ip2sl connection"
   }
 }
