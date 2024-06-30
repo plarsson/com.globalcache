@@ -53,7 +53,7 @@ class ITachIP2SLDevice extends ITachDevice {
       configClient.destroy()
 
       const payloadClient = new net.Socket()
-
+      connectorAddress = connectorAddress.replace('module ', '').replace(' : port ', ':')
       const [ , connectorLocation ] = connectorAddress.split(':')
       const ix = parseInt(connectorLocation) - 1
       const serialPort = this._serialPortBase + ix
